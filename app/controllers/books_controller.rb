@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!, except: [:top]
 
   def index
     @books = Book.all
@@ -18,6 +19,7 @@ class BooksController < ApplicationController
     if book.save
     redirect_to book_path(book.id),alert: 'You have creatad book successfully.'
   else
+    flash[:notice] = "error"
     @book_new = book
     @books = Book.all
     @user = current_user
@@ -27,16 +29,18 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    if @book.user != current_user
+      redirect_to books_path
+      end
   end
 
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
     redirect_to book_path(@book),notice: 'You have updated book successfully.'
-  else
-    @books = Book.all
-    @book = book
-    render book_path
+    else
+    flash[:notice] = "error"
+    render :edit
   end
   end
 
