@@ -68,3 +68,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 
 gem 'listen'
+
+
+gem 'pry-byebug'
+gem 'pry-rails'
