@@ -1,50 +1,70 @@
 <%= flash[:notice] %>
-<%= form_for(book) do |f| %>
-<% if @book_new.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <ul>
-      <% @book_new.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-<% end %>
-
-
-<div class="container">
-  <div class="row">
-    <div class ="col-xs-3">
-<h2>User info</h2>
-<%= attachment_image_tag user, :profile_image, :fill, 100,100, format:'jpeg', fallback: "no_image.jpg" %>
-<table class="table">
-<tbody>
-<tr>
-<th>name</th>
-<th><%= user.name %></th>
-</tr>
-<tr>
-<th>introduction</th>
-<th><%= user.introduction %></th>
-</tr>
-</tbody>
-</table>
-<% if user.id == current_user.id %>
-  <p><%= link_to edit_user_path(user.id) do %>
-    <button type="button" class="btn btn-default btn-block"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></button>
+  <%= form_for(book) do |f| %>
+    <% if @book_new.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+          <% @book_new.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </p>
   <% end %>
 
-<h2>New book</h2>
-<%= form_for(book) do |f| %>
 
-   <h4>Title</h4>
-   <%= f.text_field :title, :size=>"36" %>
+  <div class="container">
+    <div class="row">
+      <div class ="col-xs-3">
+        <h2>User info</h2>
+          <%= attachment_image_tag user, :profile_image, :fill, 100,100, format:'jpeg', fallback: "no_image.jpg" %>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th>name</th>
+                  <th><%= user.name %></th>
+                </tr>
+                <tr>
+                  <th>introduction</th>
+                  <th><%= user.introduction %></th>
+                </tr>
+                <tr>
+                  <th>follows</th>
+                  <th>
+                    <%= link_to user_following_path(user.id) do %>
+                      <%= user.followings.count %>
+                    <% end %>
+                  </th>
+                </tr>
+                <tr>
+                  <th>follrwers</th>
+                  <th>
+                    <%= link_to user_followers_path(user.id) do %>
+                      <%= @user.followers.count %>
+                    <% end %>
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          <% if user.id == current_user.id %>
+            <p><%= link_to edit_user_path(user.id) do %>
+                  <button type="button" class="btn btn-default btn-block"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></button>
+               <% end %>
+            </p>
+          <% else %>
+            <%= render 'relationships/follow_button', user: user %>
+          <% end %>
 
-   <h4>Opinion</h4>
-   <%= f.text_area :body, :size=>"35" %>
+        <h2>New book</h2>
+          <%= form_for(book) do |f| %>
 
-   <%= f.submit 'Create Book', class: 'btn btn-primary btn-block' %>
-<% end %>
-</div>
+          <h4>Title</h4>
+            <%= f.text_field :title, :size=>"36" %>
+
+          <h4>Opinion</h4>
+            <%= f.text_area :body, :size=>"35" %>
+
+            <%= f.submit 'Create Book', class: 'btn btn-primary btn-block' %>
+          <% end %>
+
+
+  </div>

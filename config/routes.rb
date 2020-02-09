@@ -8,9 +8,12 @@ Rails.application.routes.draw do
   root to: "home#top"
   get "home/about" => "home#about"
 
-  resources :users
+  resources :users do
+    get :following, :followers
+  end
   resources :books do
     resource :favorites, only: [:create, :destroy]
     resource :book_comments, only: [:create, :destroy]
   end
+  resources :relationships, only: [:create, :destroy]
 end
