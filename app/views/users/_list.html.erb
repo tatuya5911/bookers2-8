@@ -39,7 +39,7 @@
                   <th>follrwers</th>
                   <th>
                     <%= link_to user_followers_path(user.id) do %>
-                      <%= @user.followers.count %>
+                      <%= user.followers.count %>
                     <% end %>
                   </th>
                 </tr>

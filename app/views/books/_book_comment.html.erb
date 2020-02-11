@@ -1,0 +1,4 @@
+<%= book_comment.comment %>
+<% if book_comment.user == current_user %>
+  <%= link_to "削除する", book_book_comments_path(@book), method: :delete, remote: true %>
+<% end %>
