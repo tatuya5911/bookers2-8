@@ -72,3 +72,6 @@ gem 'listen'
 
 gem 'pry-byebug'
 gem 'pry-rails'
+
+gem 'jp_prefecture'
+gem 'simple_form'

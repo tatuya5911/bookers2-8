@@ -50,5 +50,9 @@ before_action :authenticate_user!
   def book_params
     params.require(:book).permit(:title,:body,:user_id)
   end
-  
+
+  def user_params
+      params.require(:user).permit(:postal_code, :prefecture_name, :address, :street)
+  end
+
 end
