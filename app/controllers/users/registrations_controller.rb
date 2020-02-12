@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
    def create
      super
-      UserNotifierMailer.send_signup_email(resource).deliver
+      ThanksMailer.send_signup_email(resource).deliver
    end
 
 

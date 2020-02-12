@@ -1,4 +1,4 @@
-class UserNotifierMailer < ApplicationMailer
+class ThanksMailer < ApplicationMailer
 
   default :from => "kka76904@gmail.com"
   default :to => "kka76904@gmail.com"
