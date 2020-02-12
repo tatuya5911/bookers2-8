@@ -75,3 +75,5 @@ gem 'pry-rails'
 
 gem 'jp_prefecture'
 gem 'simple_form'
+
+gem 'dotenv-rails'
